@@ -18,7 +18,7 @@ context.fillStyle = "rgba(0,0,0,1)";
 context.fillRect(0,0,canvas.width,canvas.height);
 
 setInterval(world, 30);
-generatePoints(5);
+generatePoints(3);
 
 function randomBetween(min, max) {
 	return Math.floor(Math.random() * (max - min)) + min;
