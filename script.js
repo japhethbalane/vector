@@ -18,7 +18,7 @@ context.fillStyle = "rgba(0,0,0,1)";
 context.fillRect(0,0,canvas.width,canvas.height);
 
 setInterval(world, 30);
-generatePoints(3);
+generatePoints(5);
 
 function randomBetween(min, max) {
 	return Math.floor(Math.random() * (max - min)) + min;
@@ -92,19 +92,16 @@ function drawLines() {
 	for (var i = 0; i < points1.length; i++) {
 		for (var j = i+1; j < points1.length; j++) {
 			context.beginPath();
-			// context.strokeStyle = "#ff0000";
 			context.strokeStyle = color(a);
 			context.moveTo(points1[i].x, points1[i].y);
 			context.lineTo(points1[j].x, points1[j].y);
 			context.stroke();
 			context.beginPath();
-			// context.strokeStyle = "#00ff00";
-			context.strokeStyle = color(b);
+			// context.strokeStyle = color(b);
 			context.moveTo(points2[i].x, points2[i].y);
 			context.lineTo(points2[j].x, points2[j].y);
 			context.stroke();
 			context.beginPath();
-			// context.strokeStyle = "#0000ff";
 			context.strokeStyle = color(c);
 			context.moveTo(points3[i].x, points3[i].y);
 			context.lineTo(points3[j].x, points3[j].y);
