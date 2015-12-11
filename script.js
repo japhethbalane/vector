@@ -31,9 +31,9 @@ function generatePoints(count) {
 		points2.push(new Point(0,canvas.width));
 		points3.push(new Point(0,canvas.width));
 		// 
-		// points1.push(new Point(0,canvas.width/3));
-		// points2.push(new Point(canvas.width/3,canvas.width/3*2));
-		// points3.push(new Point(canvas.width/3*2,canvas.width));
+		points1.push(new Point(0,canvas.width/3));
+		points2.push(new Point(canvas.width/3,canvas.width/3*2));
+		points3.push(new Point(canvas.width/3*2,canvas.width));
 	};
 }
 
