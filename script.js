@@ -97,7 +97,7 @@ function drawLines() {
 			context.lineTo(points1[j].x, points1[j].y);
 			context.stroke();
 			context.beginPath();
-			// context.strokeStyle = color(b);
+			context.strokeStyle = color(b);
 			context.moveTo(points2[i].x, points2[i].y);
 			context.lineTo(points2[j].x, points2[j].y);
 			context.stroke();
