@@ -30,7 +30,7 @@ function generatePoints(count) {
 		points1.push(new Point(0,canvas.width));
 		points2.push(new Point(0,canvas.width));
 		points3.push(new Point(0,canvas.width));
-		// 
+		
 		points1.push(new Point(0,canvas.width/3));
 		points2.push(new Point(canvas.width/3,canvas.width/3*2));
 		points3.push(new Point(canvas.width/3*2,canvas.width));
@@ -55,8 +55,8 @@ function world() {
 }
 
 function clearCanvas() {
-	context.fillStyle = "rgba(0,0,0,0.07)";
-	// context.fillStyle = "rgba(255,255,255,0.5)";
+	// context.fillStyle = "rgba(0,0,0,0.07)";
+	context.fillStyle = "rgba(255,255,255,0.5)";
 	context.fillRect(0,0,canvas.width,canvas.height);
 }
 
