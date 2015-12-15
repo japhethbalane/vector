@@ -55,8 +55,8 @@ function world() {
 }
 
 function clearCanvas() {
-	// context.fillStyle = "rgba(0,0,0,0.07)";
-	context.fillStyle = "rgba(255,255,255,0.5)";
+	context.fillStyle = "rgba(0,0,0,0.07)";
+	// context.fillStyle = "rgba(255,255,255,0.5)";
 	context.fillRect(0,0,canvas.width,canvas.height);
 }
 
