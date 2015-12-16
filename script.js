@@ -18,7 +18,7 @@ context.fillStyle = "rgba(0,0,0,1)";
 context.fillRect(0,0,canvas.width,canvas.height);
 
 setInterval(world, 30);
-generatePoints(5);
+generatePoints(10);
 
 function randomBetween(min, max) {
 	return Math.floor(Math.random() * (max - min)) + min;
@@ -56,7 +56,6 @@ function world() {
 
 function clearCanvas() {
 	context.fillStyle = "rgba(0,0,0,0.07)";
-	// context.fillStyle = "rgba(255,255,255,0.5)";
 	context.fillRect(0,0,canvas.width,canvas.height);
 }
 
@@ -97,12 +96,12 @@ function drawLines() {
 			context.lineTo(points1[j].x, points1[j].y);
 			context.stroke();
 			context.beginPath();
-			context.strokeStyle = color(b);
+			// context.strokeStyle = color(b);
 			context.moveTo(points2[i].x, points2[i].y);
 			context.lineTo(points2[j].x, points2[j].y);
 			context.stroke();
 			context.beginPath();
-			context.strokeStyle = color(c);
+			// context.strokeStyle = color(c);
 			context.moveTo(points3[i].x, points3[i].y);
 			context.lineTo(points3[j].x, points3[j].y);
 			context.stroke();
