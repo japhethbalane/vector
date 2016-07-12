@@ -96,12 +96,12 @@ function drawLines() {
 			context.lineTo(points1[j].x, points1[j].y);
 			context.stroke();
 			context.beginPath();
-			// context.strokeStyle = color(b);
+			context.strokeStyle = color(b);
 			context.moveTo(points2[i].x, points2[i].y);
 			context.lineTo(points2[j].x, points2[j].y);
 			context.stroke();
 			context.beginPath();
-			// context.strokeStyle = color(c);
+			context.strokeStyle = color(c);
 			context.moveTo(points3[i].x, points3[i].y);
 			context.lineTo(points3[j].x, points3[j].y);
 			context.stroke();
@@ -117,6 +117,10 @@ function Point(p1,p2) {
 	this.radius = 3;
 	this.speedx = randomBetween(2, 10);
 	this.speedy = randomBetween(1, 5);
+
+	// var gen = 15;
+	// this.speedx *= gen;
+	// this.speedy *= gen;
 
 	if (randomBetween(1,3) == 1) {
 		this.speedx*=-1;
