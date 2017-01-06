@@ -1,6 +1,7 @@
 * {
 	margin: 0;
 	padding: 0;
+	cursor: crosshair;
 }
 
 html, body {
@@ -10,4 +11,32 @@ html, body {
 
 canvas {
 	display: block;
+}
+
+.controls {
+	margin: 0;
+	position: absolute;
+	top: 15px;
+	left: 15px;
+	min-width: 150px;
+	height: auto;
+	padding: 10px;
+	border: 1px solid white;
+	background-color: grey;
+
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+.controls > button, div {
+	margin-top: 5px;
+}
+.controls > div > button {
+	width: 100%;
+}
+
+input[type=range] {
+	float: right;
+	text-align: center;
+	padding: 0;
 }
