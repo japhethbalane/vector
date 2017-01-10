@@ -6,7 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-	<div class="controls">
+	<div data-status="hide" class="controls">
 		<div>
 			<label>count : </label>
 			<input class="number" type="range" min="1" max="16">
@@ -16,13 +16,14 @@
 			<input class="size" type="range" min="1" max="100">
 		</div>
 		<div>
-			<label>color : </label>
+			<label>bg-color : </label>
 			<input class="color" type="color">
+			<button onclick="clearCanvas()" style="width: 25%;">Set</button>
 		</div>
 		<div>
-			<button onclick="clearCanvas()">Clear Canvas</button>
+			<button onclick="clearCanvas()">erase things</button>
 		</div>
-		<button onclick="hideControls()">Hide Controls</button>
+		<button onclick="hideControls()"></button>
 	</div>
 	<canvas id="vector"></canvas>
 	<script type="text/javascript" src="script.js"></script>

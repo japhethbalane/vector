@@ -2,17 +2,22 @@ var canvas = document.getElementById("vector");
 var ctx = canvas.getContext("2d");
 var cursorcount = 8;
 var cursorsize = 30;
+var bgColor = '#ffffff';
 
+const controls = document.querySelector('.controls');
 const numberInput = document.querySelector('.number');
 const sizeInput = document.querySelector('.size');
+const colorInput = document.querySelector('.color');
 
 numberInput.value = cursorcount;
 sizeInput.value = cursorsize;
+colorInput.value = bgColor;
 
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 clearCanvas();
+hideControls(); 
 
 ctx.lineCap = 'round';
 ctx.lineWidth = cursorsize;
@@ -57,41 +62,42 @@ function angle(cx,cy,px,py) {
     return (2 * Math.atan2(py - p0.y, px - p0.x)) * 180 / Math.PI + 90;
 }
 function clearCanvas() {
-	ctx.fillStyle = '#001634';
+	ctx.fillStyle = bgColor;
 	ctx.fillRect(0,0,canvas.width, canvas.height);
 	drawFoundation();
 }
 function hideControls() {	
+	const divs = document.querySelectorAll('.controls div');
+	for (var i = 0; i < divs.length; i++) {
+		divs[i].classList.toggle('hidden');
+	}
+	controls.dataset.status = controls.dataset.status == 'show' ? 'hide' : 'show';
+	controls.style.padding = controls.dataset.status == 'show' ? '0px' : '8px';
+	controls.lastElementChild.innerHTML = controls.dataset.status + ' controls';
 }
 function drawFoundation() {
 	ctx.lineWidth = 1;
-	ctx.strokeStyle = 'rgba(255,255,255,0.1)';
-	ctx.beginPath();
-	ctx.arc(canvas.width/2, canvas.height/2, 10, Math.PI*2, false);
-	ctx.stroke();
-	ctx.beginPath();
-	ctx.arc(canvas.width/2, canvas.height/2, 100, Math.PI*2, false);
-	ctx.stroke();
-	ctx.beginPath();
-	ctx.arc(canvas.width/2, canvas.height/2, 500, Math.PI*2, false);
-	ctx.stroke();
+	ctx.strokeStyle = 'rgba(0,0,0,0.2)';
 	
-	// ctx.beginPath();
-	// ctx.moveTo(0, 0);
-	// ctx.lineTo(canvas.width, canvas.height);
-	// ctx.stroke();
-	ctx.beginPath();
-	ctx.moveTo(0, canvas.height/2);
-	ctx.lineTo(canvas.width, canvas.height/2);
-	ctx.stroke();
-	// ctx.beginPath();
-	// ctx.moveTo(0, canvas.height);
-	// ctx.lineTo(canvas.width, 0);
-	// ctx.stroke();
-	ctx.beginPath();
-	ctx.moveTo(canvas.width/2, 0);
-	ctx.lineTo(canvas.width/2, canvas.height);
-	ctx.stroke();
+	var div = 50;
+	for (var i = 1;
+		i*div < getHypothenuse(canvas.width/2,canvas.height/2,0,0);
+		i++) {
+		ctx.beginPath();
+		ctx.arc(canvas.width/2, canvas.height/2, div*i, Math.PI*2, false);
+		ctx.stroke();
+	}
+
+	div = 32;
+	for (var i = 0; i < 360; i+=360/div) {
+		var dx = Math.cos((i)*(Math.PI/180)) * getHypothenuse(canvas.width/2,canvas.height/2,0,0);
+		var dy = Math.sin((i)*(Math.PI/180)) * getHypothenuse(canvas.width/2,canvas.height/2,0,0);
+		ctx.beginPath();
+		ctx.moveTo(canvas.width/2, canvas.height/2);
+		ctx.lineTo(canvas.width/2+dx, canvas.height/2+dy);
+		ctx.stroke();
+	}
+
 	ctx.lineWidth = cursorsize;
 }
 
@@ -138,14 +144,13 @@ function mode2(e) {
 
 numberInput.addEventListener('change', function() {
 	cursorcount = this.value;
-	// if (cursorcount > this.max) {cursorcount = this.max;}
-	// if (cursorcount < this.min) {cursorcount = this.min;}
 });
 sizeInput.addEventListener('change', function() {
 	cursorsize = this.value;
-	// if (cursorsize > this.max) {cursorsize = this.max;}
-	// if (cursorsize < this.min) {cursorsize = this.min;}
 	ctx.lineWidth = cursorsize;
+});
+colorInput.addEventListener('change', function() {
+	bgColor = this.value;
 });
 
 /////////////////////////////////////////////////////////////////
