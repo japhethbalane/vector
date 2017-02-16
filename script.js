@@ -1,38 +1,38 @@
-var canvas = document.getElementById("vector");
-var ctx = canvas.getContext("2d");
-var cursorcount = 8;
-var cursorsize = 30;
-var bgColor = '#ffffff';
-
 const controls = document.querySelector('.controls');
 const numberInput = document.querySelector('.number');
 const sizeInput = document.querySelector('.size');
 const colorInput = document.querySelector('.color');
+const waveInput = document.querySelector('.wave');
 
-numberInput.value = cursorcount;
-sizeInput.value = cursorsize;
-colorInput.value = bgColor;
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-clearCanvas();
-hideControls(); 
-
-ctx.lineCap = 'round';
-ctx.lineWidth = cursorsize;
-// ctx.globalCompositeOperation = 'multiply';
-
+var canvas = document.getElementById("vector");
+var ctx = canvas.getContext("2d");
+var cursorcount = 8;
+var cursorsize = 10;
+var maxcursorsize = 50;
+var maxcount = 30;
+var bgColor = '#ffffff';
 var isDrawing = false;
 var endx = 0;
 var endy = 0;
 var hue = randomBetween(0, 360);
 var dir = true;
+var isWavy = false;
+
+numberInput.value = cursorcount;
+sizeInput.value = cursorsize;
+colorInput.value = bgColor;
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+clearCanvas();
+ctx.lineCap = 'round';
+ctx.lineWidth = cursorsize;
+
+/////////////////////////////////////////////////////////////////
 
 function draw(e) {
 	if (isDrawing) {
 		hue+=0.1;
-		// updateDir();
+		if (isWavy) updateDir();
 		ctx.strokeStyle = 'hsl('+hue+', 100%, 50%)';
 		// mode1(e);
 		mode2(e);
@@ -47,9 +47,10 @@ function randomBetween(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
 function updateDir() {
-	if (dir) ctx.lineWidth++;
-	else ctx.lineWidth--;
-	if (ctx.lineWidth >= cursorsize || ctx.lineWidth <= 1) dir = !dir; 
+	if (dir) cursorsize++;
+	else cursorsize--;
+	ctx.lineWidth = cursorsize;
+	if (cursorsize > maxcursorsize || ctx.lineWidth <= 1) dir = !dir; 
 }
 function getHypothenuse(x1,y1,x2,y2) {
 	var x = Math.abs(x1-x2);
@@ -67,13 +68,7 @@ function clearCanvas() {
 	drawFoundation();
 }
 function hideControls() {	
-	const divs = document.querySelectorAll('.controls div');
-	for (var i = 0; i < divs.length; i++) {
-		divs[i].classList.toggle('hidden');
-	}
-	controls.dataset.status = controls.dataset.status == 'show' ? 'hide' : 'show';
-	controls.style.padding = controls.dataset.status == 'show' ? '0px' : '8px';
-	controls.lastElementChild.innerHTML = controls.dataset.status + ' controls';
+	document.querySelector('.controls').classList.toggle('hidden');
 }
 function drawFoundation() {
 	ctx.lineWidth = 1;
@@ -88,7 +83,7 @@ function drawFoundation() {
 		ctx.stroke();
 	}
 
-	div = 32;
+	div = 30;
 	for (var i = 0; i < 360; i+=360/div) {
 		var dx = Math.cos((i)*(Math.PI/180)) * getHypothenuse(canvas.width/2,canvas.height/2,0,0);
 		var dy = Math.sin((i)*(Math.PI/180)) * getHypothenuse(canvas.width/2,canvas.height/2,0,0);
@@ -143,14 +138,20 @@ function mode2(e) {
 /////////////////////////////////////////////////////////////////
 
 numberInput.addEventListener('change', function() {
-	cursorcount = this.value;
+	cursorcount = this.value > 0 && this.value <= maxcount ? this.value : cursorcount;
+	this.value = cursorcount;
 });
 sizeInput.addEventListener('change', function() {
-	cursorsize = this.value;
+	cursorsize = this.value > 0 && this.value <= maxcursorsize ? this.value : cursorsize;
 	ctx.lineWidth = cursorsize;
+	this.value = cursorsize;
 });
 colorInput.addEventListener('change', function() {
 	bgColor = this.value;
+	clearCanvas();
+});
+waveInput.addEventListener('change', function(e) {
+	isWavy = this.checked;
 });
 
 /////////////////////////////////////////////////////////////////
@@ -166,4 +167,13 @@ canvas.addEventListener('mouseup', function(e) {
 });
 canvas.addEventListener('mouseout', function(e) {
 	isDrawing = false;
+});
+
+window.addEventListener('keypress', function(e) {
+	console.log(e.keyCode);
+	if (e.keyCode == 101) {
+		clearCanvas();
+	} else if (e.keyCode == 104) {
+		hideControls();
+	}
 });

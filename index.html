@@ -8,22 +8,27 @@
 <body>
 	<div data-status="hide" class="controls">
 		<div>
-			<label>count : </label>
-			<input class="number" type="range" min="1" max="16">
+			<label>count : (1 - 30)</label>
+			<input class="number" type="number">
 		</div>
 		<div>
-			<label>size : </label>
-			<input class="size" type="range" min="1" max="100">
+			<label>size : (1 - 50)</label>
+			<input class="size" type="number">
 		</div>
 		<div>
 			<label>bg-color : </label>
 			<input class="color" type="color">
-			<button onclick="clearCanvas()" style="width: 25%;">Set</button>
 		</div>
 		<div>
-			<button onclick="clearCanvas()">erase things</button>
+			<label>waves : </label>
+			<input class="wave" type="checkbox">
 		</div>
-		<button onclick="hideControls()"></button>
+		<div>
+			<button onclick="clearCanvas()">(E) Erase</button>
+		</div>
+		<div>
+			<button onclick="hideControls()">(H) Hide</button>
+		</div>
 	</div>
 	<canvas id="vector"></canvas>
 	<script type="text/javascript" src="script.js"></script>
