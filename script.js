@@ -3,6 +3,11 @@ const numberInput = document.querySelector('.number');
 const sizeInput = document.querySelector('.size');
 const colorInput = document.querySelector('.color');
 const waveInput = document.querySelector('.wave');
+const autoInput = document.querySelector('.auto');
+const inkInput = document.querySelector('.ink');
+const randomInput = document.querySelector('.random');
+
+/////////////////////////////////////////////////////////////////
 
 var canvas = document.getElementById("vector");
 var ctx = canvas.getContext("2d");
@@ -10,36 +15,27 @@ var cursorcount = 8;
 var cursorsize = 10;
 var maxcursorsize = 50;
 var maxcount = 30;
-var bgColor = '#ffffff';
+var bgColor = '#000';
 var isDrawing = false;
 var endx = 0;
 var endy = 0;
 var hue = randomBetween(0, 360);
+var inkColor = '#ffffff';
 var dir = true;
 var isWavy = false;
+var isAuto = false;
+var isRandom = false;
 
 numberInput.value = cursorcount;
 sizeInput.value = cursorsize;
 colorInput.value = bgColor;
+inkInput.value = inkColor;
+
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 clearCanvas();
 ctx.lineCap = 'round';
 ctx.lineWidth = cursorsize;
-
-/////////////////////////////////////////////////////////////////
-
-function draw(e) {
-	if (isDrawing) {
-		hue+=0.1;
-		if (isWavy) updateDir();
-		ctx.strokeStyle = 'hsl('+hue+', 100%, 50%)';
-		// mode1(e);
-		mode2(e);
-		endx = e.pageX;
-		endy = e.pageY;
-	}
-}
 
 /////////////////////////////////////////////////////////////////
 
@@ -72,7 +68,8 @@ function hideControls() {
 }
 function drawFoundation() {
 	ctx.lineWidth = 1;
-	ctx.strokeStyle = 'rgba(0,0,0,0.2)';
+	ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+	// ctx.strokeStyle = 'rgba(0,0,0,0.2)';
 	
 	var div = 50;
 	for (var i = 1;
@@ -153,12 +150,35 @@ colorInput.addEventListener('change', function() {
 waveInput.addEventListener('change', function(e) {
 	isWavy = this.checked;
 });
+autoInput.addEventListener('change', function(e) {
+	isAuto = !isAuto;
+});
+inkInput.addEventListener('change', function(e) {
+	inkColor = this.value;
+});
+randomInput.addEventListener('change', function(e) {
+	isRandom = !isRandom;
+});
 
-/////////////////////////////////////////////////////////////////
-
-canvas.addEventListener('mousemove', draw);
+canvas.addEventListener('mousemove', function(e) {
+	// console.log(isRandom);
+	if (isDrawing || isAuto) {
+		hue+=0.1;
+		if (isWavy) updateDir();
+		ctx.shadowColor = 'black';
+		ctx.shadowBlur = 5;
+		ctx.strokeStyle = isRandom ? 'hsl('+hue+', 100%, 50%)' : inkColor;
+		// mode1(e);
+		mode2(e);
+		endx = e.pageX;
+		endy = e.pageY;
+		ctx.blur = 0;
+	}
+});
 canvas.addEventListener('mousedown', function(e) {
 	isDrawing = true;
+	isAuto = false;
+	autoInput.checked = false;
 	endx = e.pageX;
 	endy = e.pageY;
 });
@@ -175,5 +195,11 @@ window.addEventListener('keypress', function(e) {
 		clearCanvas();
 	} else if (e.keyCode == 104) {
 		hideControls();
+	} else if (e.keyCode == 114) {
+		isRandom = !isRandom;
+	} else if (e.keyCode == 119) {
+		isWavy = !isWavy;
+	} else if (e.keyCode == 97) {
+		isAuto = !isAuto;
 	}
 });
