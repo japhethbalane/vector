@@ -1,48 +1,40 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>Vector</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8">
+    <title>Vector</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-	<div data-status="hide" class="controls">
-		<div>
-			<label>count : (1 - 30)</label>
-			<input class="number" type="number">
-		</div>
-		<div>
-			<label>size : (1 - 50)</label>
-			<input class="size" type="number">
-		</div>
-		<div>
-			<label>(R) random ink-color : </label>
-			<input class="random" type="checkbox">
-		</div>
-		<div>
-			<label>choose ink-color : </label>
-			<input class="ink" type="color">
-		</div>
-		<div>
-			<label>bg-color : </label>
-			<input class="color" type="color">
-		</div>
-		<div>
-			<label>(W) waves : </label>
-			<input class="wave" type="checkbox">
-		</div>
-		<div>
-			<label>(A) auto : </label>
-			<input class="auto" type="checkbox">
-		</div>
-		<div>
-			<button onclick="clearCanvas()">(E) Erase</button>
-		</div>
-		<div>
-			<button onclick="hideControls()">(H) Hide</button>
-		</div>
-	</div>
-	<canvas id="vector"></canvas>
-	<script type="text/javascript" src="script.js"></script>
+    <div data-status="hide" class="controls">
+        <div>
+            <label>Line Count</label>
+            <input class="number" type="number">
+        </div>
+        <div>
+            <label>Line Size</label>
+            <input class="size" type="number">
+        </div>
+        <div>
+            <label>(R) Random Ink Color </label>
+            <input class="random" type="checkbox">
+        </div>
+        <div>
+            <label>Pick Ink Color </label>
+            <input class="ink" type="color">
+        </div>
+        <div>
+            <label>Background Color </label>
+            <input class="color" type="color">
+        </div>
+        <div>
+            <button onclick="clearCanvas()">(C) Clear</button>
+        </div>
+        <div>
+            <button onclick="hideControls()">(H) Hide Controls</button>
+        </div>
+    </div>
+    <canvas id="vector"></canvas>
+    <script type="text/javascript" src="script.js"></script>
 </body>
-</html> 
+</html>
