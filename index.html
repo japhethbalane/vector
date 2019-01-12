@@ -7,31 +7,58 @@
 </head>
 <body>
     <div data-status="hide" class="controls">
+        <div style="border-bottom: 1px solid black">
+            <div>
+                <input name="mode" class="display-mode" type="radio" value="0">
+                <label for="mode1">Vertical Mirror Display</label>
+            </div>
+            <div>
+                <input name="mode" class="display-mode" type="radio" value="1">
+                <label for="mode2">Cross Split Display</label>
+            </div>
+            <div>
+                <input name="mode" class="display-mode" type="radio" value="2">
+                <label for="mode3">Radial Display</label>
+            </div>
+        </div>
+        <br>
         <div>
-            <label>Line Count</label>
-            <input class="number" type="number">
+            <label>Radial Line Count</label>
+            <input class="count" type="number">
         </div>
         <div>
             <label>Line Size</label>
             <input class="size" type="number">
         </div>
         <div>
-            <label>(R) Random Ink Color </label>
-            <input class="random" type="checkbox">
+            <label>Shadow</label>
+            <input class="shadow" type="number">
+        </div>
+        <div>
+            <label>Shadow HSL Offset</label>
+            <input class="shadow-offset" type="number">
+        </div>
+        <div>
+            <label>Background Color </label>
+            <input class="bg" type="color">
         </div>
         <div>
             <label>Pick Ink Color </label>
             <input class="ink" type="color">
         </div>
         <div>
-            <label>Background Color </label>
-            <input class="color" type="color">
+            <label>( R ) Random Ink Color </label>
+            <input class="random" type="checkbox">
         </div>
         <div>
-            <button onclick="clearCanvas()">(C) Clear</button>
+            <label>( B ) Bubbly </label>
+            <input class="bubbly" type="checkbox">
         </div>
         <div>
-            <button onclick="hideControls()">(H) Hide Controls</button>
+            <button onclick="clearCanvas()">( C ) Clear Canvas</button>
+        </div>
+        <div>
+            <button disabled>Press ( H ) to hide controls</button>
         </div>
     </div>
     <canvas id="vector"></canvas>
